@@ -12,6 +12,22 @@
     <script src="revenue.js"></script>
     <script src="tenders.js"></script>
     <script>
+      function numberFormatter(number) {
+        if (number < 1000) {
+          return number;
+        }
+        if (number < 100000) {
+          return Math.round(number/100)/10 + 'k';
+        }
+        if (number < 1000000) {
+          return Math.round(number/1000) + 'k';
+        }
+        if (number < 100000000) {
+          return Math.round(number/100000)/10 + 'M';
+        }
+        return Math.round(number/1000000) + 'M';
+      }
+
       var dataset1 = [
         {
           totalRevenue: 6700000,
@@ -74,9 +90,31 @@
 
 
       window.addEventListener('load', function() {
-          renderRevenue(dataset1);
-          renderTenders(dataset2);
-      })
+        d3.json('http://localhost:8080/joineddata.json', function(error, json) {
+          console.log(json);
+          var datum = json['00166723'];
+
+          var revenue = [2009, 2010, 2011, 2012, 2013, 2014].map(function(year) {
+            return {
+                year: year,
+                totalRevenue: datum.findata[year] ? datum.findata[year].Sales : 0,
+                govRevenue: datum.pricesByYear[year] || 0
+            };
+          });
+          renderRevenue(revenue);
+
+          var tenders = datum.orders.map(function(order) {
+            return {
+              date: new Date(order.contract_date),
+              amount: parseFloat(order.final_price.replace(/\s/g, '').replace(',', '.'), 10)
+            }
+          });
+
+          console.log(tenders);
+
+          renderTenders(tenders);
+        });
+      });
     </script>
 </head>
 <body>

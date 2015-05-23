@@ -94,7 +94,7 @@ function renderRevenue(dataset) {
   var yAxis = d3.svg.axis()
     .scale(yScale)
     .orient('left')
-    .tickFormat(d3.format('s'))
+    .tickFormat(numberFormatter)
     .tickSize(-width)
     .ticks(6);
 
@@ -146,7 +146,7 @@ function renderRevenue(dataset) {
       .attr('x', function(d, i) { return xScale(d.year) + 10 + 5; })
       .attr('y', function(d) { return yScale(d.totalRevenue) - 10; })
       .attr('width', barWidth)
-      .text(function(d, i) { return d3.format('s')(d.govRevenue) + '/' + d3.format('s')(d.totalRevenue); })
+      .text(function(d, i) { return numberFormatter(d.govRevenue) + '/' + numberFormatter(d.totalRevenue); })
       .call(function() { return arguments; });
 
 

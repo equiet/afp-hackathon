@@ -95,7 +95,7 @@ function renderTenders(dataset) {
       .attr('x', function(d, i) { return xScale(d.date) + 10 + 5; })
       .attr('y', function(d) { return yScale(d.amount) - 10; })
       .attr('width', barWidth)
-      .text(function(d, i) { return d3.format('s')(d.amount); })
+      .text(function(d, i) { return numberFormatter(d.amount); })
       .call(function() { return arguments; });
 
 
