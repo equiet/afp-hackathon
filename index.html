@@ -5,12 +5,12 @@
 
     <title>Štátne zákazky</title>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,400&subset=latin,latin-ext">
 
-    <script src="bower_components/d3/d3.js"></script>
-    <script src="revenue.js"></script>
-    <script src="tenders.js"></script>
+    <script src="/bower_components/d3/d3.js"></script>
+    <script src="/revenue.js"></script>
+    <script src="/tenders.js"></script>
     <script>
       function numberFormatter(number) {
         if (number < 1000) {
@@ -90,7 +90,7 @@
 
 
       window.addEventListener('load', function() {
-        d3.json('http://localhost:8080/joineddata.json', function(error, json) {
+        d3.json('/joineddata.json', function(error, json) {
           console.log(json);
           var datum = json['00166723'];
 

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/equiet/afp-hackathon/issues"
   },
-  "homepage": "https://github.com/equiet/afp-hackathon"
+  "homepage": "https://github.com/equiet/afp-hackathon",
+  "dependencies": {
+    "express": "^4.12.4"
+  }
 }
