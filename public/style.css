@@ -37,6 +37,9 @@ input:focus {
 svg {
   margin-top: 20px;
 }
+svg.is-hidden {
+  display: none;
+}
 
 /* Scales */
 

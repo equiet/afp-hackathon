@@ -92,6 +92,10 @@
         d3.json('http://10.2.23.41:4000/api/company/' + ico, function(error, json) {
           var datum = json;
 
+          Array.prototype.slice.apply(document.querySelectorAll('svg')).forEach(function(el) {
+            el.classList.remove('is-hidden');
+          });
+
           console.log(datum);
           document.querySelector('h2').textContent = datum.Name;
 
@@ -141,7 +145,7 @@
 
         <h2></h2>
 
-        <svg class="revenue">
+        <svg class="revenue is-hidden">
             <g class="wrapper">
                 <g class="chart"></g>
                 <g class="periods">
@@ -157,7 +161,7 @@
             </g>
         </svg>
 
-        <svg class="tenders">
+        <svg class="tenders is-hidden">
             <g class="wrapper">
                 <g class="chart"></g>
                 <g class="header">
