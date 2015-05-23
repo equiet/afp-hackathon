@@ -1,55 +1,21 @@
-function render() {
-
-
-  // Data ================
-
-  var dataset = [
-    {
-      totalRevenue: 6700000,
-      govRevenue: 5500000,
-      year: 2009
-    },
-    {
-      totalRevenue: 4000000,
-      govRevenue: 3500000,
-      year: 2010
-    },
-    {
-      totalRevenue: 4000000,
-      govRevenue: 1500000,
-      year: 2011
-    },
-    {
-      totalRevenue: 5000000,
-      govRevenue: 4500000,
-      year: 2012
-    },
-    {
-      totalRevenue: 4000000,
-      govRevenue: 1500000,
-      year: 2013
-    },
-    {
-      totalRevenue: 4000000,
-      govRevenue: 1500000,
-      year: 2014
-    }
-  ];
-
+function renderRevenue(dataset) {
 
   // Chart ================
 
-  var margins = {top: 100, right: 100, bottom: 100, left: 40};
+  var margins = {top: 100, right: 20, bottom: 100, left: 40};
   var height = 400 - margins.top - margins.bottom,
       width = 800 - margins.left - margins.right,
       barPadding = 20,
       barWidth = 60;
 
-  var chart = d3.select('.revenue')
+  var svg = d3.select('.revenue')
     .attr('width', width + margins.left + margins.right)
-    .attr('height', height + margins.top + margins.bottom)
-    .append('g')
+    .attr('height', height + margins.top + margins.bottom);
+
+  var wrapper = svg.select('.wrapper')
     .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
+
+  var chart = wrapper.select('.chart');
 
 
   // Title ================
@@ -99,7 +65,7 @@ function render() {
 
   // Creates a scale for the x-axis based on city names
   var xScale = d3.scale.ordinal()
-    .domain(dataset.map(function(d) { return d.year; }))
+    .domain([2009, 2010, 2011, 2012, 2013, 2014])
     .rangeRoundBands([0, width], 0.1);
 
 
@@ -180,8 +146,54 @@ function render() {
       .attr('x', function(d, i) { return xScale(d.year) + 10 + 5; })
       .attr('y', function(d) { return yScale(d.totalRevenue) - 10; })
       .attr('width', barWidth)
-      .text(function(d, i) { return d3.format('s')(d.govRevenue) + '/' + d3.format('s')(d.totalRevenue); });
+      .text(function(d, i) { return d3.format('s')(d.govRevenue) + '/' + d3.format('s')(d.totalRevenue); })
+      .call(function() { return arguments; });
+
+
+  // Periods ================
+
+  wrapper.select('.periods')
+    .attr('transform', 'translate(0, ' + (height + 0) + ')');
+
+  var frameStart = new Date(2009, 1, 1),
+      frameEnd = new Date();
+
+  var periods = [
+    {
+      start: frameStart,
+      end: new Date(2010, 07, 09),
+      label: 'Vláda R. Fica'
+    },
+    {
+      start: new Date(2010, 07, 09),
+      end: new Date(2012, 04, 04),
+      label: 'Vláda I. Radičovej'
+    },
+    {
+      start: new Date(2012, 04, 04),
+      end: new Date(),
+      label: 'Vláda R. Fica'
+    }
+  ];
+
+  wrapper.selectAll('.periods rect')
+    .data(periods)
+    .attr('width', function(d, i) { return (d.end - d.start) / (frameEnd - frameStart) * 730; })
+    .attr('x', function(d, i) { return (d.start - frameStart) / (frameEnd - frameStart) * 730; });
+
+  wrapper.select('.periods').append('rect')
+    .attr('class', 'overlay')
+    .attr('width', 730)
+    .attr('height', 22)
+    .attr('rx', 3)
+    .attr('ry', 3);
+
+  wrapper.selectAll('.periods text')
+    .data(periods)
+    .attr('x', function(d, i) {
+      var start = (d.start - frameStart) / (frameEnd - frameStart),
+          length = (d.end - d.start) / (frameEnd - frameStart);
+      return (start + length/2) * 730;
+    });
 
 }
-
-window.addEventListener('load', render);

@@ -9,7 +9,75 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:700,300,600,400&subset=latin,latin-ext">
 
     <script src="bower_components/d3/d3.js"></script>
-    <script src="script.js"></script>
+    <script src="revenue.js"></script>
+    <script src="tenders.js"></script>
+    <script>
+      var dataset1 = [
+        {
+          totalRevenue: 6700000,
+          govRevenue: 5500000,
+          year: 2009
+        },
+        {
+          totalRevenue: 4000000,
+          govRevenue: 3500000,
+          year: 2010
+        },
+        {
+          totalRevenue: 4000000,
+          govRevenue: 1500000,
+          year: 2011
+        },
+        {
+          totalRevenue: 5000000,
+          govRevenue: 4500000,
+          year: 2012
+        },
+        {
+          totalRevenue: 4000000,
+          govRevenue: 1500000,
+          year: 2013
+        },
+        {
+          totalRevenue: 4000000,
+          govRevenue: 1500000,
+          year: 2014
+        }
+      ];
+
+      var dataset2 = [
+        {
+          date: new Date(2010, 8, 3),
+          amount: 560030
+        },
+        {
+          date: new Date(2011, 2, 3),
+          amount: 560030
+        },
+        {
+          date: new Date(2012, 8, 3),
+          amount: 560030
+        },
+        {
+          date: new Date(2013, 1, 3),
+          amount: 560030
+        },
+        {
+          date: new Date(2013, 3, 3),
+          amount: 560030
+        },
+        {
+          date: new Date(2013, 11, 3),
+          amount: 560030
+        }
+      ];
+
+
+      window.addEventListener('load', function() {
+          renderRevenue(dataset1);
+          renderTenders(dataset2);
+      })
+    </script>
 </head>
 <body>
     <div class="container">
@@ -19,15 +87,38 @@
         <input name="query" placeholder="Hľadaj podľa zamerania, mena firmy alebo IČO....">
 
         <svg class="revenue">
-            <g class="periods">
-                <rect></rect>
-                <text>Vláda R. Fica</text>
+            <g class="wrapper">
+                <g class="chart"></g>
+                <g class="periods">
+                    <rect x="0" y="0" width="25.3%" height="22" fill="#ED9F87"></rect>
+                    <text dy="15">vláda R. Fica</text>
 
-                <rect></rect>
-                <text>Vláda I. Radičovej</text>
+                    <rect x="25.3%" y="0" width="29%" height="22" fill="#81C4E6"></rect>
+                    <text dy="15">vláda I. Radičovej</text>
 
-                <rect></rect>
-                <text>Vláda I. Radičovej</text>
+                    <rect x="54.3%" y="0" width="45.7%" height="22" fill="#ED9F87"></rect>
+                    <text dy="15">vláda R. Fica</text>
+                </g>
+            </g>
+        </svg>
+
+        <svg class="tenders">
+            <g class="wrapper">
+                <g class="chart"></g>
+                <g class="header">
+                    <text y="-49" class="title">Obstarávania</text>
+                    <rect></rect>
+                </g>
+                <g class="periods">
+                    <rect x="0" y="0" width="25.3%" height="22" fill="#ED9F87"></rect>
+                    <text dy="15">vláda R. Fica</text>
+
+                    <rect x="25.3%" y="0" width="29%" height="22" fill="#81C4E6"></rect>
+                    <text dy="15">vláda I. Radičovej</text>
+
+                    <rect x="54.3%" y="0" width="45.7%" height="22" fill="#ED9F87"></rect>
+                    <text dy="15">vláda R. Fica</text>
+                </g>
             </g>
         </svg>
 

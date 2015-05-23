@@ -27,10 +27,11 @@ input {
     padding: 0 25px;
     border-radius: 50px;
     border: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 20px;
 }
 
 svg {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 /* Scales */
@@ -51,6 +52,9 @@ svg {
         fill: rgba(0,0,0,0.5);
         font-weight: 600;
         transform: translate(5px, 0);
+    }
+    .y.axis .tick:first-child {
+        display: none;
     }
 
 .x.axis {
@@ -91,9 +95,20 @@ rect.gov-revenue {
     fill: #D3BBE0;
 }
 
+rect.tender {
+    stroke: #A55DCC;
+    fill: #D3BBE0;
+}
+
 .revenue-label {
   font-size: 11px;
   font-weight: 600;
+}
+
+.tender-amount {
+  font-size: 11px;
+  font-weight: 600;
+  text-anchor: middle;
 }
 
 /* Title */
@@ -117,4 +132,18 @@ rect.legend-gov-revenue {
     stroke: #A55DCC;
     fill: #D3BBE0;
 }
+
+.periods {
+}
+    .periods text {
+      font-size: 10px;
+      font-weight: 700;
+      text-anchor: middle;
+      fill: rgba(0,0,0,0.5);
+    }
+    .periods .overlay {
+        stroke: #000;
+        stroke-opacity: 0.2;
+        fill: none;
+    }
 
