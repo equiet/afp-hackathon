@@ -45,7 +45,7 @@ function renderTenders(dataset) {
     .call(xAxis)
     .selectAll('g')
       .append('rect')
-        .attr('width', width/dataset.length - 8)
+        .attr('width', Math.max(width/dataset.length - 8, 0))
         .attr('height', 3)
         .attr('dx', -width/dataset.length/2)
         .attr('rx', 3)
@@ -78,9 +78,9 @@ function renderTenders(dataset) {
       .append('rect')
       .classed('tender', true)
       .attr('x', function(d, i) { return xScale(d.date) + 10; })
-      .attr('y', function(d) { return yScale(d.amount); })
+      .attr('y', function(d) { return yScale(d.amount || 0); })
       .attr('width', barWidth)
-      .attr('height', function(d) { return height - yScale(d.amount) + 10; })
+      .attr('height', function(d) { return height - yScale(d.amount || 0) + 10; })
       .attr('rx', 3)
       .attr('ry', 3);
 
@@ -93,9 +93,9 @@ function renderTenders(dataset) {
       .append('text')
       .classed('tender-amount', true)
       .attr('x', function(d, i) { return xScale(d.date) + 10 + 5; })
-      .attr('y', function(d) { return yScale(d.amount) - 10; })
+      .attr('y', function(d) { return yScale(d.amount || 0) - 10; })
       .attr('width', barWidth)
-      .text(function(d, i) { return numberFormatter(d.amount); })
+      .text(function(d, i) { return numberFormatter(d.amount || 0); })
       .call(function() { return arguments; });
 
 
