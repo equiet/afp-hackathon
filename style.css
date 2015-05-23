@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 30px;
+}
+
+input {
+    width: calc(100% - 20px);
+    margin-left: 10px;
+    height: 50px;
+    line-height: 100%;
+    font-size: 13px;
+    padding: 0 25px;
+    border-radius: 50px;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+svg {
+  margin-top: 50px;
+}
+
+/* Scales */
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.y.axis {
+    stroke: rgb(0,0,0);
+    stroke-opacity: 0.05;
+    shape-rendering: crispEdges;
+}
+    .y.axis text {
+        fill: rgba(0,0,0,0.5);
+        font-weight: 600;
+        transform: translate(5px, 0);
+    }
+
+.x.axis {
+}
+    .x.axis line {
+        stroke: none;
+    }
+    .x.axis text {
+        font-weight: 600;
+        fill: rgba(0,0,0,0.7);
+        transform: translateY(20px);
+    }
+    .x.axis rect {
+        fill: rgba(0,0,0,0.1);
+    }
+
+.axis .domain {
+    stroke: none;
+}
+
+.tick {
+    font-size: 11px;
+}
+
+
+/* Bars */
+
+rect {
+}
+
+rect.total-revenue {
+    stroke: #CECECE;
+    fill: #F0F0F0;
+}
+
+rect.gov-revenue {
+    stroke: #A55DCC;
+    fill: #D3BBE0;
+}
+
+.revenue-label {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Title */
+.title {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.legend {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.7);
+}
+
+rect.legend-total-revenue {
+    stroke: #CECECE;
+    fill: #F0F0F0;
+}
+
+rect.legend-gov-revenue {
+    stroke: #A55DCC;
+    fill: #D3BBE0;
+}
+
