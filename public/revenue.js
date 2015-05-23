@@ -37,7 +37,7 @@ function renderRevenue(dataset) {
   var legendTotalText = chart.append('text')
     .attr('class', 'legend')
     .attr('y', -50)
-    .text('z verejných zákaziek')
+    .text('celkový obrat')
     .attr('x', 130);
 
   var legendGovRect = chart.append('rect')
@@ -47,13 +47,13 @@ function renderRevenue(dataset) {
     .attr('rx', 3)
     .attr('ry', 3)
     .attr('y', -60)
-    .attr('x', 250);
+    .attr('x', 220);
 
   var legendGovText = chart.append('text')
     .attr('class', 'legend')
     .attr('y', -50)
-    .text('zo štátnych zákaziek')
-    .attr('x', 270);
+    .text('z verejných zákaziek')
+    .attr('x', 240);
 
 
   // Scales ================
