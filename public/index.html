@@ -89,19 +89,22 @@
       // ];
 
       function loadData(ico) {
-        d3.json('/joineddata.json', function(error, json) {
-          var datum = json[ico];
+        d3.json('http://10.2.23.41:4000/api/company/' + ico, function(error, json) {
+          var datum = json;
+
+          console.log(datum);
+          document.querySelector('h2').textContent = datum.Name;
 
           var revenue = [2009, 2010, 2011, 2012, 2013, 2014].map(function(year) {
             return {
                 year: year,
-                totalRevenue: datum.findata[year] ? datum.findata[year].Sales : 0,
+                totalRevenue: datum.FinData[year] ? datum.FinData[year].Sales : 0,
                 govRevenue: datum.pricesByYear[year] || 0
             };
           });
           renderRevenue(revenue);
 
-          var tenders = datum.orders.map(function(order) {
+          var tenders = datum.filteredContracts.map(function(order) {
             return {
               date: new Date(order.contract_date),
               amount: parseFloat(order.final_price.replace(/\s/g, '').replace(',', '.'), 10)
@@ -135,6 +138,8 @@
         <form>
           <input name="query" placeholder="Hľadaj podľa zamerania, mena firmy alebo IČO....">
         </form>
+
+        <h2></h2>
 
         <svg class="revenue">
             <g class="wrapper">

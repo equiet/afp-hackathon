@@ -60,7 +60,7 @@ function renderRevenue(dataset) {
 
   // Create a scale for the y-axis based on data
   var yScale = d3.scale.linear()
-    .domain([0, d3.max(dataset, function(d) { return d.totalRevenue; })])
+    .domain([0, d3.max(dataset, function(d) { return Math.max(d.totalRevenue, d.govRevenue); })])
     .range([height, 0]);
 
   // Creates a scale for the x-axis based on city names

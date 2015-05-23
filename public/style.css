@@ -29,6 +29,10 @@ input {
     border: 1px solid rgba(0,0,0,0.2);
     margin-bottom: 20px;
 }
+input:focus {
+  outline: none;
+  border-color: #81C4E6;
+}
 
 svg {
   margin-top: 20px;
