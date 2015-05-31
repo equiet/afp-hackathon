@@ -28,75 +28,22 @@
         return Math.round(number/1000000) + 'M';
       }
 
-      // var dataset1 = [
-      //   {
-      //     totalRevenue: 6700000,
-      //     govRevenue: 5500000,
-      //     year: 2009
-      //   },
-      //   {
-      //     totalRevenue: 4000000,
-      //     govRevenue: 3500000,
-      //     year: 2010
-      //   },
-      //   {
-      //     totalRevenue: 4000000,
-      //     govRevenue: 1500000,
-      //     year: 2011
-      //   },
-      //   {
-      //     totalRevenue: 5000000,
-      //     govRevenue: 4500000,
-      //     year: 2012
-      //   },
-      //   {
-      //     totalRevenue: 4000000,
-      //     govRevenue: 1500000,
-      //     year: 2013
-      //   },
-      //   {
-      //     totalRevenue: 4000000,
-      //     govRevenue: 1500000,
-      //     year: 2014
-      //   }
-      // ];
-
-      // var dataset2 = [
-      //   {
-      //     date: new Date(2010, 8, 3),
-      //     amount: 560030
-      //   },
-      //   {
-      //     date: new Date(2011, 2, 3),
-      //     amount: 560030
-      //   },
-      //   {
-      //     date: new Date(2012, 8, 3),
-      //     amount: 560030
-      //   },
-      //   {
-      //     date: new Date(2013, 1, 3),
-      //     amount: 560030
-      //   },
-      //   {
-      //     date: new Date(2013, 3, 3),
-      //     amount: 560030
-      //   },
-      //   {
-      //     date: new Date(2013, 11, 3),
-      //     amount: 560030
-      //   }
-      // ];
-
       function loadData(ico) {
-        d3.json('http://10.2.23.41:4000/api/company/' + ico, function(error, json) {
-          var datum = json;
+        document.querySelector('.error').style.display = 'none';
+
+        ico = ico.replace(/\s/g, '');
+
+        d3.json('/api/company/' + ico, function(error, datum) {
+          if (error && error.status === 404) {
+            document.querySelector('.error').style.display = 'block';
+            document.querySelector('.error').textContent = 'Nenašli sme žiadnu firmu, ktorá má IČO ' + ico;
+            return;
+          }
 
           Array.prototype.slice.apply(document.querySelectorAll('svg')).forEach(function(el) {
             el.classList.remove('is-hidden');
           });
 
-          console.log(datum);
           document.querySelector('h2').textContent = datum.Name;
 
           var revenue = [2009, 2010, 2011, 2012, 2013, 2014].map(function(year) {
@@ -112,15 +59,9 @@
             return {
               date: new Date(order.contract_date),
               amount: parseFloat(order.final_price.replace(/\s/g, '').replace(',', '.'), 10)
-            }
+            };
           });
-
           renderTenders(tenders);
-
-          document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            document.querySelector('input').value
-          })
         });
       }
 
@@ -142,6 +83,8 @@
         <form>
           <input name="query" placeholder="Vyhľadávanie podľa IČO...">
         </form>
+
+        <p class="error"></p>
 
         <h2></h2>
 

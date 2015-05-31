@@ -16,6 +16,7 @@ function renderTenders(dataset) {
     .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
 
   var chart = wrapper.select('.chart');
+  chart.selectAll('*').remove();
 
 
   // Scales ================

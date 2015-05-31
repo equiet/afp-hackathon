@@ -16,6 +16,7 @@ function renderRevenue(dataset) {
     .attr('transform', 'translate(' + margins.left + ',' + margins.top + ')');
 
   var chart = wrapper.select('.chart');
+  chart.selectAll('*').remove();
 
 
   // Title ================
@@ -144,7 +145,7 @@ function renderRevenue(dataset) {
       .append('text')
       .classed('revenue-label', true)
       .attr('x', function(d, i) { return xScale(d.year) + 10 + 5; })
-      .attr('y', function(d) { return yScale(d.totalRevenue) - 10; })
+      .attr('y', function(d) { return yScale(Math.max(d.totalRevenue, d.govRevenue)) - 10; })
       .attr('width', barWidth)
       .text(function(d, i) { return numberFormatter(d.govRevenue) + '/' + numberFormatter(d.totalRevenue); })
       .call(function() { return arguments; });
