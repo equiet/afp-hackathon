@@ -92,7 +92,7 @@ function renderTenders(dataset) {
     .enter()
       .append('text')
       .classed('tender-amount', true)
-      .attr('x', function(d, i) { return xScale(d.date) + 10 + 5; })
+      .attr('x', function(d) { return xScale(d.date) + 10 + 5; })
       .attr('y', function(d) { return yScale(d.amount || 0) - 10; })
       .attr('width', barWidth)
       .text(function(d, i) { return numberFormatter(d.amount || 0); })
